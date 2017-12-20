@@ -18,15 +18,10 @@ public class BurpExtender implements IBurpExtender {
     public static AmxSuiteTab amxSuiteTab;
 
     public void registerExtenderCallbacks(IBurpExtenderCallbacks callbacks) {
-
         BurpExtender.stdout = new PrintWriter(callbacks.getStdout(), true);
         BurpExtender.stderr = new PrintWriter(callbacks.getStderr(), true);
         BurpExtender.callbacks = callbacks;
         BurpExtender.helpers = callbacks.getHelpers();
-
-        if (DEBUG) {
-            stdout.println(EXTENSION_NAME + " initializing");
-        }
 
         amxSessionHandler = new AmxSessionHandler();
         amxSuiteTab = new AmxSuiteTab();
@@ -34,9 +29,5 @@ public class BurpExtender implements IBurpExtender {
         callbacks.setExtensionName(EXTENSION_NAME);
         callbacks.registerSessionHandlingAction(amxSessionHandler);
         callbacks.addSuiteTab(amxSuiteTab);
-
-        if (DEBUG) {
-            stdout.println(EXTENSION_NAME + " initialized");
-        }
     }
 }
